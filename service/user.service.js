@@ -54,6 +54,33 @@ class UserService{
             console.log(error);
         }
     }
+
+    async addFollowing(id,interestId){
+        try{
+            const user = await User.findOneAndUpdate({_id:id},{$push:{followings:interestId}},{new:true});
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    async addFollower(id,interestId){
+        try{
+            const user = await User.findOneAndUpdate({_id:id},{$push:{followers:interestId}},{new:true});
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    async findFollowerById(id){
+        try{
+            const user = await User.findOne({followings:id});
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
     static getinstance(){
         if(!UserService.instance){
             UserService.instance = new UserService();

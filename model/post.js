@@ -9,9 +9,13 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    image:{
+        type: String,
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     comments: [{
         type: mongoose.Schema.Types.ObjectId,

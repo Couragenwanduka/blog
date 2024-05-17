@@ -1,6 +1,7 @@
 import UserService from './services/userService.js';
 import appError from './utils/appError.js';
-import { comparePassword } from '../config/bcrypt.js'; // Corrected the import path
+import { comparePassword } from '../config/bcrypt.js'; 
+import {singleUpload } from '../middleware/multer.js'
 
 class UserController {
     constructor() {
@@ -111,27 +112,24 @@ class UserController {
         try {
             singleUpload(req, res, async (error) => {
                 if (error) {
-                    return res.status(400).json({ message: "Error uploading image", error: error });
+                    return next(new appError("Error uploading image", 400));
                 }
                 
                 const file = req.file; // Access the single file
                 
                 if (!file) {
-                    return res.status(400).json({ message: "No image uploaded" });
+                    return next(new appError("No image uploaded", 400));
                 }
         
                 const uploadImage = await cloudinary.uploader.upload(file.path);
         
                 if (!uploadImage) {
-                    return res.status(400).json({ message: "Image upload failed" });
+                    return next(new appError("Image upload failed", 400));
                 }
 
                 const { id } = req.params; // Corrected id extraction from params
                 const imageUrl = uploadImage.secure_url;
                 const updatedUser = await this.userService.addUserPicture(id, imageUrl)
-                if (!updatedUser) {
-                    return res.status(401).json({ error: 'Something went wrong' })
-                }
                 return res.status(200).json({ message: "Image uploaded successfully" });
         
             });

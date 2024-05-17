@@ -4,10 +4,7 @@ import {hashPassword} from '../config/bcrpty.js'
 class UserService{
 
     constructor(){
-        if (UserService.instance){
-            return UserService.instance;
-        }
-        UserService.instance = this;
+
     }
     async createUser(fullName,userName,email,password,mobile){
         const secrect = await hashPassword(password)
@@ -81,12 +78,28 @@ class UserService{
             console.log(error);
         }
     }
-    static getinstance(){
-        if(!UserService.instance){
-            UserService.instance = new UserService();
+
+    async addPost(id,postId){
+        try{
+            const user = await User.findOneAndUpdate({_id:id},{$push:{posts:postId}},{new:true});
+            return user;
+        }catch(error){
+            console.log(error);
         }
-        return UserService.instance;
     }
+
+    async getUserById(id){
+        try{
+            const user = await User.findOne({_id:id});
+            return user;
+        }catch(error){
+            console.log(error);
+        }
+    }
+    async removePost(userId, postId) {
+        return User.findByIdAndUpdate(userId, { $pull: { posts: postId } }, { new: true });
+    }
+    
 }
 
-export default UserService.getinstance();
+export default UserService;

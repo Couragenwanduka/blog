@@ -7,7 +7,7 @@ const commentSchema = mongoose.Schema({
         ref: "Post",
         index: true
     },
-    comments: [{
+    comments: {
         author: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
@@ -27,7 +27,7 @@ const commentSchema = mongoose.Schema({
             type: Date,
             default: Date.now
         }
-    }]
+    }
 });
 
 commentSchema.set('timestamps', {

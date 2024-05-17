@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Post from "./post";
+
 
 const commentSchema = mongoose.Schema({
     PostId: {

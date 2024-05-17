@@ -1,6 +1,6 @@
-import appError from './utils/appError.js';
+import appError from '../error/appError.js';
 import PostService from '../service/post.service.js';
-import UserService from './services/userService.js';
+import UserService from '../service/user.service.js';
 import { singleUpload } from '../middleware/multer.js';
 
 class PostController {

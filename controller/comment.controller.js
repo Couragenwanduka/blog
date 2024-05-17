@@ -1,5 +1,5 @@
-import CommentService from "../service/comment.service";
-import appError from './utils/appError.js';
+import CommentService from "../service/comment.service.js";
+import appError from '../error/appError.js';
 
 class CommentContoller{
     constructor(){
@@ -48,3 +48,5 @@ class CommentContoller{
         }
     }
 }
+
+export default CommentContoller;

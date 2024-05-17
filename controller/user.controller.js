@@ -1,6 +1,6 @@
-import UserService from './services/userService.js';
-import appError from './utils/appError.js';
-import { comparePassword } from '../config/bcrypt.js'; 
+import UserService from '../service/user.service.js';
+import appError from '../error/appError.js';
+import { comparePassword } from '../config/bcrpty.js'; 
 import {singleUpload } from '../middleware/multer.js'
 
 class UserController {
@@ -66,7 +66,7 @@ class UserController {
         }
     }
 
-    async editPassword(req, res, next) {
+    async updatePassword(req, res, next) {
         try {
             const { email, password } = req.body;
 

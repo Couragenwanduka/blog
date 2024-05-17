@@ -1,4 +1,4 @@
-### Gossip 
+# Gossip 
 
 ## Description
 Gossip is a bloging platform that allows users to write about what interests them and also allows other users to interact with their post 
@@ -52,6 +52,6 @@ project-root/
 1. Start the server:
 
 ``` bash
-Copy code
+
 npm start
 ```
